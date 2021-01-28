@@ -1,3 +1,15 @@
+Kibana is a dashboard for ElasticSearch, but I used it as a live-updating dashboard to display accelerometer data in real-time for my ballet performance.
+
+Biggest problem was getting the timestamps right. Ended up using InternetTime from cc3000 lib and creating a new index with time as epoch_second.
+
+2nd biggest problem was getting a No Results Found error in Kib. because my arduino was indexing time to a column called @timestamp when the index had been created with a field called Timestamp.
+
+3rd biggest problem was having to increase the max number of histogram bins from the Management/Advanced Settings page so that I could do a custom interval of the Date Hist by 10s.  Not sure this ended up being necessary because of this next issue:
+
+4th biggest problem was getting the histogram bins set up. Crucial bit was changin the time period examined to the past 5min BY HACKING: Choose "Past 15m" and edit the URL down to 5m.
+time:(from:now-5m,mode:quick,...
+
+
 # Kibana 6.2.2
 
 Kibana is your window into the [Elastic Stack](https://www.elastic.co/products). Specifically, it's
